@@ -1,5 +1,5 @@
 def call(String project, String hubUser) {
-    sh "docker image build -t ${hubUser}/${project} https://github.com/LondheShubham153/reddit-clone-k8s-ingress.git#:master:reddit-clone-k8s-ingress
+    sh "docker image build -t ${hubUser}/${project} https://github.com/LondheShubham153/reddit-clone-k8s-ingress.git#:master:reddit-clone-k8s-ingress"
     sh "docker tag ${hubUser}/${project} ${hubUser}/${project}:${ImageTag}"
     sh "docker tag ${hubUser}/${project} ${hubUser}/${project}:latest"
     withCredentials([usernamePassword(
