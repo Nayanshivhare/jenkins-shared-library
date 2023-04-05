@@ -1,7 +1,7 @@
-def call(String image-name, String docker-repo) {
-    sh "docker image build -t ${docker-repo}/${image-name} https://github.com/LondheShubham153/reddit-clone-k8s-ingress.git"
-    sh "docker tag ${docker-repo}/${image-name} ${docker-repo}/${image-name}:${ImageTag}"
-    sh "docker tag ${docker-repo}/${image-name} ${docker-repo}/${image-name}:latest"
+def call(String imagename, String dockerrepo) {
+    sh "docker image build -t ${dockerrepo}/${imagename} . "
+    sh "docker tag ${dockerrepo}/${imagename} ${dockerrepo}/${imagename}:${ImageTag}"
+    sh "docker tag ${dockerrepo}/${imagename} ${dockerrepo}/${imagename}:latest"
     withCredentials([usernamePassword(
             credentialsId: "docker_cred",
             usernameVariable: "USER",
@@ -9,6 +9,6 @@ def call(String image-name, String docker-repo) {
     )]) {
         sh "docker login -u '$USER' -p '$PASS'"
     }
-    sh "docker image push ${docker-repo}/${image-name}:${ImageTag}"
-    sh "docker image push ${docker-repo}/${image-name}:latest"
+    sh "docker image push ${dockerrepo}/${imagename}:${ImageTag}"
+    sh "docker image push ${dockerrepo}/${imagename}:latest"
 }
